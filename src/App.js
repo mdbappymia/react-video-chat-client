@@ -93,26 +93,26 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h1>Video Chat</h1>
-      <div className="container">
-        <div className="video-container">
-          <div className="video">
+    <div className=" bg-violet-500 min-h-screen ">
+      <h1 className="text-center font-bold text-5xl uppercase text-white py-10">
+        Video Chat
+      </h1>
+      <div className="container m-auto">
+        <div className="video-container lg:w-1/2 m-auto flex justify-around">
+          <div className="video bg-white h-48 w-48">
             {stream && (
               <video
                 playsInline
-                muted
                 ref={myVideo}
                 autoPlay
                 style={{ width: "300px" }}
               />
             )}
           </div>
-          <div className="video">
+          <div className="video h-48 bg-white w-48">
             {callAccepted && !callEnded ? (
               <video
                 playsInline
-                muted
                 ref={myVideo}
                 autoPlay
                 style={{ width: "300px" }}
@@ -121,35 +121,56 @@ function App() {
           </div>
         </div>
 
-        <div className="myId">
+        <div className="lg:w-1/2 m-auto">
           <input
             type="text"
-            className="id-input"
+            className=" p-3 text-xl w-full my-5"
+            placeholder="Set Your Name"
             onChange={(e) => setName(e.target.value)}
           />
           <CopyToClipboard text={me}>
-            <button>Copy Id</button>
+            <button className="bg-indigo-700 text-white font-bold block px-3 py-2">
+              Copy Id
+            </button>
           </CopyToClipboard>
 
           <input
             type="text"
-            className="id-to-call"
+            className=" p-3 text-xl w-full my-5"
+            placeholder="Enter Caller Id"
             onChange={(e) => setIdToCall(e.target.value)}
           />
           <div className="call-button">
             {callAccepted && !callEnded ? (
-              <button onClick={leaveCall}>End Call</button>
+              <button
+                className="bg-red-500 px-2 py-2 font-bold text-white hover:bg-red-600"
+                onClick={leaveCall}
+              >
+                End Call
+              </button>
             ) : (
-              <button onClick={() => callUser(idToCall)}>phone icon</button>
+              <button
+                className="bg-green-500 p-3 text-white hover:text-gray-200 hover:bg-green-800 rounded-full text-4xl"
+                onClick={() => callUser(idToCall)}
+              >
+                <i className="fas fa-phone"></i>
+              </button>
             )}
-            {idToCall}
+            <span className=" inline-block ml-5 text-4xl text-white">
+              {idToCall}
+            </span>
           </div>
         </div>
         <div>
           {receivingCall && !callAccepted ? (
-            <div className="caller">
-              <h1>{name} is calling...</h1>
-              <button onClick={answerCall}>Answer</button>
+            <div className="text-center">
+              <h1 className="text-3xl">{name} is calling...</h1>
+              <button
+                className=" bg-green-500 font-bold text-xl hover:bg-green-700 text-white px-3 py-2 m-4 rounded-lg"
+                onClick={answerCall}
+              >
+                Answer
+              </button>
             </div>
           ) : null}
         </div>
